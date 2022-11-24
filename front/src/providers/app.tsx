@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -6,5 +7,15 @@ type AppProviderProps = {
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => {
-  return <Router>{children}</Router>;
+  return (
+    <React.Suspense
+      fallback={
+        <div className="flex items-center justify-center w-screen h-screen">
+          <CircularProgress />
+        </div>
+      }
+    >
+      <Router>{children}</Router>
+    </React.Suspense>
+  );
 };

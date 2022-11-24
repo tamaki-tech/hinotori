@@ -1,10 +1,11 @@
 import { lazyImport } from "@/utils/lazyImport";
 import storage from "@/utils/storage";
+import { Login } from "@mui/icons-material";
 import { Navigate } from "react-router-dom";
 
-const { Login } = lazyImport(
-  () => import("@/features/auth/LoginPage"),
-  "Login"
+const { Following } = lazyImport(
+  () => import("@/features/following/Following"),
+  "Following"
 );
 
 // TODO refactor
@@ -13,7 +14,7 @@ const navigateTo = () => {
   return authInfo ? <Navigate to={"/app/following"} /> : <Login />;
 };
 
-export const publicRoutes = [
-  { path: "/app/login", element: <Login /> },
+export const protectedRoutes = [
+  { path: "/app/following", element: <Following /> },
   { path: "/*", element: navigateTo() },
 ];
