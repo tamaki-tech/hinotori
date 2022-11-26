@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-hinotori-dev-135740-authRole",
+            "UnauthRoleArn": "arn:aws:iam::076328776453:role/amplify-hinotori-dev-135740-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::076328776453:role/amplify-hinotori-dev-135740-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-hinotori-dev-135740-deployment",
+            "UnauthRoleName": "amplify-hinotori-dev-135740-unauthRole",
+            "StackName": "amplify-hinotori-dev-135740",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:076328776453:stack/amplify-hinotori-dev-135740/db966bc0-6d46-11ed-9865-06eda5fd39c5",
+            "AmplifyAppId": "d1oavtajuivpnl"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1oavtajuivpnl",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}
