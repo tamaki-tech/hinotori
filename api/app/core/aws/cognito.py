@@ -45,3 +45,21 @@ class CognitoClient:
                 "SECRET_HASH": self.__secret_hash(username=login_id),
             },
         )
+
+    def initialize_change_password(
+        self,
+        session: str,
+        login_id: str,
+        new_password: str,
+    ) -> dict:
+        return self.client.admin_respond_to_auth_challenge(
+            UserPoolId=self.pool_id,
+            ClientId=self.client_id,
+            ChallengeName="NEW_PASSWORD_REQUIRED",
+            Session=session,
+            ChallengeResponses={
+                "USERNAME": login_id,
+                "NEW_PASSWORD": new_password,
+                "SECRET_HASH": self.__secret_hash(username=login_id),
+            },
+        )

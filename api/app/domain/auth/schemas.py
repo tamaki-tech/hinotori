@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel, Field
 
 
@@ -9,5 +7,5 @@ class LoginRequest(BaseModel):
 
 
 class LoginResponse(BaseModel):
-    access_token: Optional[str] = Field(title="アクセストークン")
-    session: Optional[str] = Field(title="セッション")
+    access_token: str | None = Field(title="アクセストークン", nullable=True)
+    session: str | None = Field(title="セッション", nullable=True)

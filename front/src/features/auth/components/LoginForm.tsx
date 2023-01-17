@@ -1,80 +1,56 @@
+import { LoginRequest } from "@/api/schemas";
+import { AuthContext } from "@/providers/auth";
 import {
   Box,
   Button,
   Checkbox,
   FormControlLabel,
-  Grid,
-  Link,
   TextField,
-  Typography,
 } from "@mui/material";
+import { useContext } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
+  const { register, handleSubmit } = useForm<LoginRequest>();
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const onSubmit: SubmitHandler<LoginRequest> = async (body: LoginRequest) => {
+    await login(body);
     navigate("/app/following");
   };
 
   return (
     <Box
-      sx={{
-        marginTop: 20,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
+      component="form"
+      sx={{ alignItems: "center" }}
+      onSubmit={handleSubmit(onSubmit)}
     >
-      <Typography component="h1" variant="h3">
-        hinotori
-      </Typography>
-      <Box component="form" noValidate sx={{ my: 1 }} onSubmit={handleLogin}>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="メールアドレス"
-          name="email"
-          autoComplete="email"
-          autoFocus
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="パスワード"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="ログイン情報を保存する"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          ログイン
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2">
-              パスワードを忘れた場合
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="#" variant="body2">
-              新規会員登録はこちら
-            </Link>
-          </Grid>
-        </Grid>
-      </Box>
+      <TextField
+        id="login_id"
+        margin="normal"
+        required
+        fullWidth
+        label="ログインID"
+        {...register("login_id")}
+      />
+      <TextField
+        id="password"
+        margin="normal"
+        required
+        fullWidth
+        label="パスワード"
+        type="password"
+        {...register("password")}
+      />
+      <FormControlLabel
+        control={<Checkbox value="remember" color="primary" />}
+        label="ログイン情報を保存する"
+      />
+      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+        ログイン
+      </Button>
     </Box>
   );
 };
